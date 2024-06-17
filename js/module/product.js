@@ -1,7 +1,7 @@
-import { conecction } from "../../db/conection";
+import { connection } from "../../db/connection.js"
 
 export const getAllProductsDescription = async() =>{
-    let res = await conecction.query(`   SELECT productLine, productDescription FROM products`);
+    let [result]= await connection.query(`SELECT productLine, productDescription FROM products`);
     return result;
 }
 

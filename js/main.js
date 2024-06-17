@@ -1,3 +1,3 @@
-import { getAllProductsDescription } from "./module/product";
- 
-console.log( await getAllProductsDescription() )
+import {getAllProductsDescription} from "./module/product.js"
+
+console.log(await getAllProductsDescription());
