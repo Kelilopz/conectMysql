@@ -9,7 +9,7 @@
 2. **Encontrar todos los empleados que trabajan en la oficina de 'San Francisco':**
 
    ```sql
-   SELECT employeeNumber, lastName, firstName, officeCode FROM employees WHERE officeCode = 1;
+   SELECT employeeNumber, firstName,lastName, t2.officeCode FROM employees t1 INNER JOIN offices t2 ON t2.officeCode=t1.officeCode WHERE t2.city = 'San Francisco';
    ```
 
 3. **Listar todas las órdenes que tienen un estado de 'Enviado':**
@@ -152,7 +152,7 @@
 4. **Encontrar la cantidad total de productos pedidos por cada cliente:**
 
    ```sql
-   SELECT customerNumber, SUM(t2.quantityOrdered) 'Total products by client' FROM orders t1 INNER JOIN orderdetails t2  GROUP BY customerNumber;
+   SELECT customerName, SUM(t1.quantityOrdered) FROM customers INNER JOIN orders t2 USING (customerNumber) INNER JOIN orderdetails t1 USING (orderNumber) WHERE t2.status = 'Shipped' GROUP BY customerName;
    ```
 
 5. **Calcular el total de ventas (cantidad ordenada por precio cada uno) por cada cliente:**
