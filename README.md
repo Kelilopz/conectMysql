@@ -164,37 +164,37 @@
 6. **Obtener el promedio de la cantidad de productos en stock por línea de productos:**
 
    ```sql
-   
+   SELECT productLine, AVG(quantityInStock) 'Quantity In Stock' FROM products GROUP BY productLine;
    ```
 
 7. **Calcular el total de pagos recibidos por cada país:**
 
    ```sql
-   
+   SELECT country, SUM(amount) FROM customers INNER JOIN payments USING (customerNumber) GROUP BY  country;
    ```
 
 8. **Encontrar el promedio de ventas (cantidad ordenada por precio cada uno) por cada empleado:**
 
    ```sql
-   
+   SELECT t1.firstName, t1.lastName, FORMAT(AVG(t3.amount),2) As AdverageAmount FROM employees t1 INNER JOIN customers t2 ON employeeNumber = salesRepEmployeeNumber INNER JOIN payments t3 USING (customerNumber) GROUP BY t1.firstName, t1.lastName ORDER BY AdverageAmount ;
    ```
 
 9. **Calcular el total de órdenes gestionadas por cada empleado:**
 
    ```sql
-   
+    SELECT t1.firstName, t1.lastName, COUNT(*) As OrdersByEmployee FROM employees t1 INNER JOIN customers t2 ON employeeNumber = salesRepEmployeeNumber INNER JOIN orders t3 USING (customerNumber) GROUP BY t1.firstName, t1.lastName;
    ```
 
 10. **Obtener la cantidad total de productos vendidos por cada línea de productos:**
 
     ```sql
-    
+   SELECT pl.productLine, SUM(od.quantityOrdered) AS SaleProducts FROM productlines pl INNER JOIN products p ON pl.productLine = p.productLine INNER JOIN orderdetails od ON p.productCode = od.productCode GROUP BY pl.productLine;
     ```
 
 11. **Encontrar el promedio de la cantidad de productos ordenados por cada cliente:**
 
     ```sql
-    
+   SELECT customerName, AVG()
     ```
 
 12. **Calcular el total de ventas realizadas en cada país:**
