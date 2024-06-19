@@ -187,20 +187,20 @@
 
 10. **Obtener la cantidad total de productos vendidos por cada línea de productos:**
 
-    ```sql
+   ```sql
    SELECT pl.productLine, SUM(od.quantityOrdered) AS SaleProducts FROM productlines pl INNER JOIN products p ON pl.productLine = p.productLine INNER JOIN orderdetails od ON p.productCode = od.productCode GROUP BY pl.productLine;
-    ```
+   ```
 
-11. **Encontrar el promedio de la cantidad de productos ordenados por cada cliente:**
+11.**Encontrar el promedio de la cantidad de productos ordenados por cada cliente:**
 
-    ```sql
-   SELECT customerName, AVG()
-    ```
+   ```sql
+   SELECT c.customerName, AVG(o.quantityOrdered) AS adverange_total FROM customers c INNER JOIN orders d USING (customerNumber) INNER JOIN orderdetails o USING (orderNumber) GROUP BY c.customerName ORDER BY adverange_total;
+   ```
 
 12. **Calcular el total de ventas realizadas en cada país:**
 
     ```sql
-    
+   SELECT c.country, SUM(d.quantityOrdered) 'SalesByCountry' FROM customers c INNER JOIN orders o USING (customerNumber) INNER JOIN orderdetails d USING (orderNumber) WHERE status= "Shipped" GROUP BY c.country;
     ```
 
 13. **Obtener el promedio del precio de compra de los productos por línea de productos:**
