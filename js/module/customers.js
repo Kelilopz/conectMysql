@@ -11,3 +11,22 @@ export const getAllOrderdetailsByCustomers = async(status=["Resolved", "Shipped"
     `, [id]);
     return result;
 }
+
+//Recuperar todos los clientes de 'USA' que tienen un límite de crédito superior a 50000
+
+export const getAllCustomerByLimitCredit = async() =>{
+    let [result]= await connection.query(`   
+     SELECT customerNumber,customerName,country,creditLimit FROM customers WHERE creditLimit> 50000 AND country= "USA"
+     `);
+    return result;
+}
+
+
+//Obtener el promedio del límite de crédito de todos los clientes:
+export const getAllCustomerLimitCredit = async() =>{
+    let [result]= await connection.query(`   
+    SELECT FORMAT(AVG(creditLimit),2) 'Average Credit Limit' FROM customers
+    `);
+    return result;
+}
+
